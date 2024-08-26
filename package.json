@@ -1,0 +1,30 @@
+{
+  "name": "odin-inventory-application",
+  "version": "1.0.0",
+  "description": "Solution to the TOP's Node path, Node.js course, project Inventory Application.",
+  "main": "./dist/index.js",
+  "scripts": {
+    "format": "npx prettier ./src -w",
+    "lint": "npx eslint ./src",
+    "prebuild": "rm -rf ./dist/views ./dist/public",
+    "build": "npx tsc && cp -r ./src/views ./dist/views && cp -r ./src/public ./dist/public",
+    "start": "node --env-file=.env ./dist/index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "@types/express": "^4.17.21",
+    "@types/pg": "^8.11.6",
+    "eslint": "^9.9.1",
+    "globals": "^15.9.0",
+    "prettier": "3.3.3",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.2.0"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
+  }
+}

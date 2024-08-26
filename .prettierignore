@@ -1,0 +1,10 @@
+# Ignore build output directories
+dist/
+
+# Ignore specific configuration files
+*.config.*js
+*.config.*ts
+*config.json
+
+# Ignore lock files
+package-lock.json
