@@ -24,7 +24,7 @@ const query = `
   );
 `;
 function main() {
-    console.log('Seeding...'); // eslint-disable-line no-console
+    console.log('Seeding...');
     const client = new pg_1.Client({
         database: process.env.PG_DATABASE,
         host: process.env.PG_HOST,
@@ -34,7 +34,7 @@ function main() {
     });
     client.connect(() => {
         client.query(query, () => {
-            console.log('Done'); // eslint-disable-line no-console
+            console.log('Done');
             client.end();
         });
     });

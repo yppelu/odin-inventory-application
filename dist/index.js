@@ -16,5 +16,5 @@ app.get('/', (req, res) => {
     res.send('I am working!');
 });
 app.listen(PORT, () => {
-    console.log('Server is running on port ' + PORT); // eslint-disable-line no-console
+    console.log('Server is running on port ' + PORT);
 });
