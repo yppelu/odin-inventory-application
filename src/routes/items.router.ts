@@ -1,8 +1,9 @@
 import { Router } from 'express';
+import { renderAllItems } from '../controllers/items.controller';
 
 const itemsRouter = Router();
 
-itemsRouter.get('/', (req, res) => {});
+itemsRouter.get('/', renderAllItems);
 
 itemsRouter
   .route('/add-item')

@@ -13,10 +13,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.queryAllCategories = queryAllCategories;
+exports.queryAllItems = queryAllItems;
 const pool_1 = __importDefault(require("./pool"));
+const queries = {
+    allCategories: { query: 'SELECT * FROM categories;' },
+    allItems: { query: 'SELECT * FROM items;' }
+};
+function makeQuery(query) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { rows } = query.params
+            ? yield pool_1.default.query(query.query, query.params)
+            : yield pool_1.default.query(query.query);
+        return rows;
+    });
+}
 function queryAllCategories() {
     return __awaiter(this, void 0, void 0, function* () {
-        const { rows } = yield pool_1.default.query('SELECT * FROM categories;');
-        return rows;
+        return yield makeQuery(queries.allCategories);
+    });
+}
+function queryAllItems() {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield makeQuery(queries.allItems);
     });
 }
