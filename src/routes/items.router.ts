@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { renderAllItems } from '../controllers/items.controller';
+import { renderAllItemsPage } from '../controllers/items.controller';
 
 const itemsRouter = Router();
 
-itemsRouter.get('/', renderAllItems);
+itemsRouter.get('/', renderAllItemsPage);
 
 itemsRouter
   .route('/add-item')
