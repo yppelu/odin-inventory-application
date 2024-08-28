@@ -2,8 +2,8 @@ import pool from './pool';
 import { CategoryType, ItemType, queriesType, queryType } from '../../types';
 
 const queries: queriesType = {
-  allCategories: { query: 'SELECT * FROM categories;' },
-  allItems: { query: 'SELECT * FROM items;' }
+  selectAllCategories: { query: 'SELECT * FROM categories;' },
+  selectAllItems: { query: 'SELECT * FROM items;' }
 };
 
 async function makeQuery<T>(query: queryType): Promise<T[]> {
@@ -13,10 +13,12 @@ async function makeQuery<T>(query: queryType): Promise<T[]> {
   return rows;
 }
 
-export async function queryAllCategories(): Promise<CategoryType[]> {
-  return await makeQuery<CategoryType>(queries.allCategories);
+export async function getAllCategories(): Promise<CategoryType[]> {
+  return await makeQuery<CategoryType>(queries.selectAllCategories);
 }
 
-export async function queryAllItems(): Promise<ItemType[]> {
-  return await makeQuery<ItemType>(queries.allItems);
+export async function getAllItems(): Promise<ItemType[]> {
+  return await makeQuery<ItemType>(queries.selectAllItems);
 }
+
+export async function insertNewCategory() {}
