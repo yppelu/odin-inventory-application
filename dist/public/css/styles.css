@@ -140,7 +140,8 @@ body {
   width: 100%;
 }
 
-.categories-header {
+.categories-header,
+.items-header {
   flex-grow: 0;
   display: flex;
   flex-direction: column;
@@ -153,12 +154,14 @@ body {
   padding: 1rem;
 }
 
-.all-categories-title {
+.all-categories-title,
+.all-items-title {
   font-size: 1.3rem;
   font-weight: 500;
 }
 
-.add-category-link {
+.add-category-link,
+.add-item-link {
   background-color: #0066ff;
   border-radius: 0.5rem;
   color: #ffffff;
@@ -169,11 +172,12 @@ body {
   padding: 0.5rem 1rem;
 }
 
-.categories-body {
+.categories-body,
+.items-body {
   flex-grow: 1;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, 220px);
+  grid-template-columns: repeat(auto-fill, 220px);
   gap: 1rem;
   align-content: start;
   justify-content: center;
@@ -183,7 +187,8 @@ body {
   padding: 1rem;
 }
 
-.category-preview {
+.category-preview,
+.item-preview {
   border-radius: 0.5rem;
   overflow: hidden;
   transition: border-color 0.15s ease-in-out;
@@ -194,12 +199,14 @@ body {
   border: 1px solid #ececec;
 }
 
-.category-preview__image {
+.category-preview__image,
+.item-preview__image {
   object-fit: cover;
   height: 220px;
 }
 
-.category-preview__svg-wrapper {
+.category-preview__svg-wrapper,
+.item-preview__svg-wrapper {
   background-color: #b1b0b575;
 
   display: flex;
@@ -209,16 +216,27 @@ body {
   height: 220px;
 }
 
-.category-preview__no-image-svg {
+.category-preview__no-image-svg,
+.item-preview__no-image-svg {
   fill: #464853;
 
   height: 30%;
   width: 30%;
 }
 
-.category-preview__name {
-  font-weight: 500;
+.category-preview__description-wrapper,
+.item-preview__description-wrapper {
   padding: 0.5rem;
+}
+
+.category-preview__name,
+.item-preview__name {
+  font-weight: 500;
+}
+
+.item-preview__price {
+  color: #464853;
+  font-size: 0.95rem;
 }
 
 @media (hover: hover) {
@@ -226,11 +244,13 @@ body {
     border-color: #b1b0b5;
   }
 
-  .add-category-link:hover {
+  .add-category-link:hover,
+  .add-item-link:hover {
     background-color: #005ce6;
   }
 
-  .category-preview:hover {
+  .category-preview:hover,
+  .item-preview:hover {
     border-color: #b1b0b5;
   }
 }

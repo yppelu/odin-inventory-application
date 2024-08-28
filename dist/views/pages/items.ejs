@@ -1,0 +1,13 @@
+<%- include('../partials/head') %>
+  <div class="items-header">
+    <h2 class="all-items-title">All Items</h2>
+    <a class="add-item-link" href="/items/add-item">
+      Add item
+    </a>
+  </div>
+  <div class="items-body">
+    <% items.forEach((item) => { %>
+      <%- include('../partials/item-preview', {id: item.id, name: item.name, price: item.price, image: item.image}) %>
+    <% }); %>
+  </div>
+<%- include('../partials/footer') %>
