@@ -1,0 +1,13 @@
+<%- include('../partials/head') %>
+    <div class="categories-header">
+      <h2 class="all-categories-title">All Categories</h2>
+      <a class="add-category-link" href="/categories/add-category">
+        Add category
+      </a>
+    </div>
+    <div class="categories-body">
+      <% categories.forEach((category) => { %>
+        <%- include('../partials/category-preview', {id: category.id, name: category.name, image: category.image}) %>
+      <% }); %>
+    </div>
+<%- include('../partials/footer') %>
