@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.renderAllItems = renderAllItems;
+exports.renderAllItemsPage = renderAllItemsPage;
 const queries_1 = require("../model/db/queries");
-function renderAllItems(req, res) {
+function renderAllItemsPage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const items = yield (0, queries_1.queryAllItems)();
         res.render('pages/items', { title: 'All Items', items });

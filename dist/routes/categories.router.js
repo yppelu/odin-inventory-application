@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const categories_controller_1 = require("../controllers/categories.controller");
 const categoriesRouter = (0, express_1.Router)();
-categoriesRouter.get('/', categories_controller_1.renderAllCategories);
+categoriesRouter.get('/', categories_controller_1.renderAllCategoriesPage);
 categoriesRouter
     .route('/add-category')
-    .get((req, res) => { })
+    .get(categories_controller_1.renderAddCategoryPage)
     .post((req, res) => { });
 categoriesRouter
     .route('/:id')

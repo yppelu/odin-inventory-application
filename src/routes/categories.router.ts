@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { renderAllCategoriesPage } from '../controllers/categories.controller';
+import {
+  renderAddCategoryPage,
+  renderAllCategoriesPage
+} from '../controllers/categories.controller';
 
 const categoriesRouter = Router();
 
@@ -7,7 +10,7 @@ categoriesRouter.get('/', renderAllCategoriesPage);
 
 categoriesRouter
   .route('/add-category')
-  .get((req, res) => {})
+  .get(renderAddCategoryPage)
   .post((req, res) => {});
 
 categoriesRouter

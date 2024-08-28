@@ -9,11 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.renderAllCategories = renderAllCategories;
+exports.renderAllCategoriesPage = renderAllCategoriesPage;
+exports.renderAddCategoryPage = renderAddCategoryPage;
 const queries_1 = require("../model/db/queries");
-function renderAllCategories(req, res) {
+function renderAllCategoriesPage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const categories = yield (0, queries_1.queryAllCategories)();
         res.render('pages/categories', { title: 'All Categories', categories });
+    });
+}
+function renderAddCategoryPage(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        res.render('pages/add-category', { title: 'Add Category' });
     });
 }

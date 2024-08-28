@@ -161,7 +161,8 @@ body {
 }
 
 .add-category-link,
-.add-item-link {
+.add-item-link,
+.add-category-form__submit-button {
   background-color: #0066ff;
   border-radius: 0.5rem;
   color: #ffffff;
@@ -239,6 +240,61 @@ body {
   font-size: 0.95rem;
 }
 
+.add-category__title {
+  font-size: 1.3rem;
+  font-weight: 500;
+
+  align-self: center;
+  padding: 1rem;
+}
+
+.add-category-form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-category-form__fieldset {
+  border-radius: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  border: 1px solid #b1b0b5;
+  padding: 1rem;
+}
+
+.add-category-form__legend {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.add-category-form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.add-category-form__label-text {
+  font-weight: 500;
+}
+
+.add-category-form__input {
+  appearance: none;
+  border-radius: 0.25rem;
+
+  border: 1px solid #b1b0b5;
+  padding: 0.1rem 0.25rem;
+  min-width: 30ch;
+}
+
+.add-category-form__submit-button {
+  appearance: none;
+  align-self: flex-start;
+}
+
 @media (hover: hover) {
   .index-navigation-list-item:hover {
     border-color: #b1b0b5;
@@ -252,6 +308,10 @@ body {
   .category-preview:hover,
   .item-preview:hover {
     border-color: #b1b0b5;
+  }
+
+  .add-category-form__submit-button:hover {
+    background-color: #005ce6;
   }
 }
 
