@@ -1,8 +1,9 @@
 import { Router } from 'express';
+import { renderAllCategories } from '../controllers/categories.controller';
 
 const categoriesRouter = Router();
 
-categoriesRouter.get('/', (req, res) => {});
+categoriesRouter.get('/', renderAllCategories);
 
 categoriesRouter
   .route('/add-category')
