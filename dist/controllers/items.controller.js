@@ -10,10 +10,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.renderAllItemsPage = renderAllItemsPage;
+exports.renderAddItemPage = renderAddItemPage;
 const queries_1 = require("../model/db/queries");
 function renderAllItemsPage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const items = yield (0, queries_1.getAllItems)();
         res.render('pages/items', { title: 'All Items', items });
+    });
+}
+function renderAddItemPage(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        res.render('pages/add-item', { title: 'Add Item' });
     });
 }

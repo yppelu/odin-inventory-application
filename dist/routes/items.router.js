@@ -6,7 +6,7 @@ const itemsRouter = (0, express_1.Router)();
 itemsRouter.get('/', items_controller_1.renderAllItemsPage);
 itemsRouter
     .route('/add-item')
-    .get((req, res) => { })
+    .get(items_controller_1.renderAddItemPage)
     .post((req, res) => { });
 itemsRouter
     .route('/:id')

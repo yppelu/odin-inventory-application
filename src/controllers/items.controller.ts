@@ -5,3 +5,7 @@ export async function renderAllItemsPage(req: Request, res: Response) {
   const items = await getAllItems();
   res.render('pages/items', { title: 'All Items', items });
 }
+
+export async function renderAddItemPage(req: Request, res: Response) {
+  res.render('pages/add-item', { title: 'Add Item' });
+}
