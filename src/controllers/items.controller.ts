@@ -1,5 +1,6 @@
 import { Request, Response } from 'express-serve-static-core';
-import { getAllItems } from '../model/db/queries';
+import { addNewItem, getAllCategories, getAllItems } from '../model/db/queries';
+import { addItemFormReturnType } from '../types';
 
 export async function renderAllItemsPage(req: Request, res: Response) {
   const items = await getAllItems();
@@ -7,5 +8,27 @@ export async function renderAllItemsPage(req: Request, res: Response) {
 }
 
 export async function renderAddItemPage(req: Request, res: Response) {
-  res.render('pages/add-item', { title: 'Add Item' });
+  const categories = await getAllCategories();
+  res.render('pages/add-item', { title: 'Add Item', categories });
+}
+
+export async function createItem(req: Request, res: Response): Promise<void> {
+  const chosenCategories: number[] = [];
+  for (const key in req.body) {
+    if (key.match(/check-\d/)) {
+      const categoryIdFromKey = parseInt(key.replace('check-', ''));
+      chosenCategories.push(categoryIdFromKey);
+    }
+  }
+
+  const params: addItemFormReturnType = {
+    name: req.body.name,
+    description: req.body.description,
+    price: req.body.price,
+    categoryIds: chosenCategories,
+    image: req.body['image-url']
+  };
+  const createdItem = await addNewItem(params);
+
+  res.redirect(`/items/${createdItem.id}`);
 }

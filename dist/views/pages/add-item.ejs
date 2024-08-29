@@ -17,8 +17,17 @@
     </label>
     <label class="add-item-form__label">
       <span class="add-item-form__label-text">Price:</span>
-      <input class="add-item-form__input" type="number" name="description" min="0" step="0.01" required />
+      <input class="add-item-form__input" type="number" name="price" min="0" step="0.01" required />
     </label>
+  </fieldset>
+  <fieldset class="add-item-form__fieldset">
+    <legend class="add-item-form__legend">Choose category(ies)</legend>
+    <% for (let i = 0; i < categories.length; i++) { %>
+      <label class="add-item-form__choose-category-label">
+        <input type="checkbox" name="<%= 'check-' + categories[i].id %>" />
+        <%= categories[i].name %>
+      </label>
+    <% } %>
   </fieldset>
   <fieldset class="add-item-form__fieldset">
     <legend class="add-item-form__legend">Image</legend>

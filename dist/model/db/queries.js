@@ -15,11 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllCategories = getAllCategories;
 exports.getAllItems = getAllItems;
 exports.addNewCategory = addNewCategory;
+exports.addItemCategoriesRelation = addItemCategoriesRelation;
+exports.addNewItem = addNewItem;
 const pool_1 = __importDefault(require("./pool"));
 const queries = {
     selectAllCategories: 'SELECT * FROM categories;',
     selectAllItems: 'SELECT * FROM items;',
-    insertNewCategory: 'INSERT INTO categories (name, description, image) VALUES ($1, $2, $3) RETURNING *;'
+    insertNewCategory: 'INSERT INTO categories (name, description, image) VALUES ($1, $2, $3) RETURNING *;',
+    insertNewItem: 'INSERT INTO items (name, description, price, image) VALUES ($1, $2, $3, $4) RETURNING *;',
+    insertCategoryItemRelation: 'INSERT INTO category_item_relations (category_id, item_id) VALUES ($1, $2);'
 };
 function makeQuery(query, params) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -43,5 +47,30 @@ function addNewCategory(params) {
     return __awaiter(this, void 0, void 0, function* () {
         const createdCategories = yield makeQuery(queries.insertNewCategory, Object.values(params));
         return createdCategories[0];
+    });
+}
+function addItemCategoriesRelation(itemId, categoryIds) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (typeof categoryIds === 'number') {
+            yield makeQuery(queries.insertCategoryItemRelation, [categoryIds, itemId]);
+        }
+        else {
+            Promise.all(categoryIds.map((categoryId) => {
+                return makeQuery(queries.insertCategoryItemRelation, [categoryId, itemId]);
+            }));
+        }
+    });
+}
+function addNewItem(_a) {
+    return __awaiter(this, arguments, void 0, function* ({ name, description, price, categoryIds, image }) {
+        const createdItems = yield makeQuery(queries.insertNewItem, [
+            name,
+            description,
+            price,
+            image
+        ]);
+        const createdItem = createdItems[0];
+        yield addItemCategoriesRelation(createdItem.id, categoryIds);
+        return createdItem;
     });
 }

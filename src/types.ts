@@ -13,6 +13,12 @@ export type ItemType = {
   image?: string;
 };
 
+export type CategoryItemRelationType = {
+  id: number;
+  category_id: number;
+  item_id: number;
+};
+
 export type queriesType = {
   [key: string]: string;
 };
@@ -20,5 +26,13 @@ export type queriesType = {
 export type addCategoryFormReturnType = {
   name: string;
   description?: string;
+  image?: string;
+};
+
+export type addItemFormReturnType = {
+  name: string;
+  description?: string;
+  price: number;
+  categoryIds: number[];
   image?: string;
 };

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+  createItem,
   renderAddItemPage,
   renderAllItemsPage
 } from '../controllers/items.controller';
@@ -8,10 +9,7 @@ const itemsRouter = Router();
 
 itemsRouter.get('/', renderAllItemsPage);
 
-itemsRouter
-  .route('/add-item')
-  .get(renderAddItemPage)
-  .post((req, res) => {});
+itemsRouter.route('/add-item').get(renderAddItemPage).post(createItem);
 
 itemsRouter
   .route('/:id')

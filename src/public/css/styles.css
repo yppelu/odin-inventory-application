@@ -306,6 +306,12 @@ body {
   align-self: flex-start;
 }
 
+.add-item-form__choose-category-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 @media (hover: hover) {
   .index-navigation-list-item:hover {
     border-color: #b1b0b5;

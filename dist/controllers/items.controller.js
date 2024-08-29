@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.renderAllItemsPage = renderAllItemsPage;
 exports.renderAddItemPage = renderAddItemPage;
+exports.createItem = createItem;
 const queries_1 = require("../model/db/queries");
 function renderAllItemsPage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -20,6 +21,27 @@ function renderAllItemsPage(req, res) {
 }
 function renderAddItemPage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        res.render('pages/add-item', { title: 'Add Item' });
+        const categories = yield (0, queries_1.getAllCategories)();
+        res.render('pages/add-item', { title: 'Add Item', categories });
+    });
+}
+function createItem(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const chosenCategories = [];
+        for (const key in req.body) {
+            if (key.match(/check-\d/)) {
+                const categoryIdFromKey = parseInt(key.replace('check-', ''));
+                chosenCategories.push(categoryIdFromKey);
+            }
+        }
+        const params = {
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            categoryIds: chosenCategories,
+            image: req.body['image-url']
+        };
+        const createdItem = yield (0, queries_1.addNewItem)(params);
+        res.redirect(`/items/${createdItem.id}`);
     });
 }
