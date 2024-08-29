@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+  createCategory,
   renderAddCategoryPage,
   renderAllCategoriesPage
 } from '../controllers/categories.controller';
@@ -11,7 +12,7 @@ categoriesRouter.get('/', renderAllCategoriesPage);
 categoriesRouter
   .route('/add-category')
   .get(renderAddCategoryPage)
-  .post((req, res) => {});
+  .post(createCategory);
 
 categoriesRouter
   .route('/:id')

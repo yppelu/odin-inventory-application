@@ -12,28 +12,36 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.queryAllCategories = queryAllCategories;
-exports.queryAllItems = queryAllItems;
+exports.getAllCategories = getAllCategories;
+exports.getAllItems = getAllItems;
+exports.addNewCategory = addNewCategory;
 const pool_1 = __importDefault(require("./pool"));
 const queries = {
-    allCategories: { query: 'SELECT * FROM categories;' },
-    allItems: { query: 'SELECT * FROM items;' }
+    selectAllCategories: 'SELECT * FROM categories;',
+    selectAllItems: 'SELECT * FROM items;',
+    insertNewCategory: 'INSERT INTO categories (name, description, image) VALUES ($1, $2, $3) RETURNING *;'
 };
-function makeQuery(query) {
+function makeQuery(query, params) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { rows } = query.params
-            ? yield pool_1.default.query(query.query, query.params)
-            : yield pool_1.default.query(query.query);
+        const { rows } = params
+            ? yield pool_1.default.query(query, params)
+            : yield pool_1.default.query(query);
         return rows;
     });
 }
-function queryAllCategories() {
+function getAllCategories() {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield makeQuery(queries.allCategories);
+        return yield makeQuery(queries.selectAllCategories);
     });
 }
-function queryAllItems() {
+function getAllItems() {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield makeQuery(queries.allItems);
+        return yield makeQuery(queries.selectAllItems);
+    });
+}
+function addNewCategory(params) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const createdCategories = yield makeQuery(queries.insertNewCategory, Object.values(params));
+        return createdCategories[0];
     });
 }

@@ -13,7 +13,12 @@ export type ItemType = {
   image?: string;
 };
 
-export type queryType = { query: string; params?: string[] };
 export type queriesType = {
-  [key: string]: queryType;
+  [key: string]: string;
+};
+
+export type addCategoryFormReturnType = {
+  name: string;
+  description?: string;
+  image?: string;
 };

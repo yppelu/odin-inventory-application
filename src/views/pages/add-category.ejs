@@ -1,6 +1,10 @@
 <%- include('../partials/head') %>
 <h2 class="add-category__title">New Category</h2>
-<form class="add-category-form" action="/categories/add-category" method="post">
+<form
+  class="add-category-form"
+  action="/categories/add-category"
+  method="post"
+>
   <fieldset class="add-category-form__fieldset">
     <legend class="add-category-form__legend">Main information</legend>
     <label class="add-category-form__label">
@@ -15,11 +19,7 @@
   <fieldset class="add-category-form__fieldset">
     <legend class="add-category-form__legend">Image</legend>
     <label class="add-category-form__label">
-      <span class="add-category-form__label-text">Upload a file:</span>
-      <input type="file" name="image-file" />
-    </label>
-    <label class="add-category-form__label">
-      <span class="add-category-form__label-text">Or enter a URL:</span>
+      <span class="add-category-form__label-text">Enter a URL:</span>
       <input class="add-category-form__input" type="url" name="image-url" />
     </label>
   </fieldset>

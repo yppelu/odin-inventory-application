@@ -7,7 +7,7 @@ categoriesRouter.get('/', categories_controller_1.renderAllCategoriesPage);
 categoriesRouter
     .route('/add-category')
     .get(categories_controller_1.renderAddCategoryPage)
-    .post((req, res) => { });
+    .post(categories_controller_1.createCategory);
 categoriesRouter
     .route('/:id')
     .get((req, res) => { })
