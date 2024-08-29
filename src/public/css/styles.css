@@ -141,7 +141,8 @@ body {
 }
 
 .categories-header,
-.items-header {
+.items-header,
+.category-header {
   flex-grow: 0;
   display: flex;
   flex-direction: column;
@@ -155,7 +156,8 @@ body {
 }
 
 .all-categories-title,
-.all-items-title {
+.all-items-title,
+.category-title {
   font-size: 1.3rem;
   font-weight: 500;
 }
@@ -163,7 +165,8 @@ body {
 .add-category-link,
 .add-item-link,
 .add-category-form__submit-button,
-.add-item-form__submit-button {
+.add-item-form__submit-button,
+.update-category-link {
   background-color: #0066ff;
   border-radius: 0.5rem;
   color: #ffffff;
@@ -312,23 +315,48 @@ body {
   gap: 0.5rem;
 }
 
+.category-body__wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  border-left: 1px solid #ececec;
+  border-right: 1px solid #ececec;
+  padding: 1rem;
+}
+
+.category-body__title {
+  align-items: start;
+
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.category-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 220px);
+  gap: 1rem;
+  align-content: start;
+  justify-content: center;
+}
+
 @media (hover: hover) {
   .index-navigation-list-item:hover {
     border-color: #b1b0b5;
   }
 
   .add-category-link:hover,
-  .add-item-link:hover {
+  .add-item-link:hover,
+  .add-category-form__submit-button:hover,
+  .add-item-form__submit-button:hover,
+  .update-category-link :hover {
     background-color: #005ce6;
   }
 
   .category-preview:hover,
   .item-preview:hover {
     border-color: #b1b0b5;
-  }
-
-  .add-category-form__submit-button:hover {
-    background-color: #005ce6;
   }
 }
 

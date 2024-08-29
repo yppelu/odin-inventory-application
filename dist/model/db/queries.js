@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllCategories = getAllCategories;
 exports.getAllItems = getAllItems;
+exports.getCategoryData = getCategoryData;
+exports.getItemsForCategory = getItemsForCategory;
 exports.addNewCategory = addNewCategory;
 exports.addItemCategoriesRelation = addItemCategoriesRelation;
 exports.addNewItem = addNewItem;
@@ -21,6 +23,12 @@ const pool_1 = __importDefault(require("./pool"));
 const queries = {
     selectAllCategories: 'SELECT * FROM categories;',
     selectAllItems: 'SELECT * FROM items;',
+    selectCategoryData: 'SELECT * FROM categories WHERE id = $1;',
+    selectITemsForCategory: `
+    SELECT items.id, items.name, items.description, items.price, items.image
+    FROM items
+    JOIN category_item_relations ON items.id = category_item_relations.item_id
+    WHERE category_item_relations.category_id = $1;`,
     insertNewCategory: 'INSERT INTO categories (name, description, image) VALUES ($1, $2, $3) RETURNING *;',
     insertNewItem: 'INSERT INTO items (name, description, price, image) VALUES ($1, $2, $3, $4) RETURNING *;',
     insertCategoryItemRelation: 'INSERT INTO category_item_relations (category_id, item_id) VALUES ($1, $2);'
@@ -41,6 +49,19 @@ function getAllCategories() {
 function getAllItems() {
     return __awaiter(this, void 0, void 0, function* () {
         return yield makeQuery(queries.selectAllItems);
+    });
+}
+function getCategoryData(categoryId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const categoriesData = yield makeQuery(queries.selectCategoryData, [categoryId]);
+        return categoriesData[0];
+    });
+}
+function getItemsForCategory(categoryId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield makeQuery(queries.selectITemsForCategory, [
+            categoryId
+        ]);
     });
 }
 function addNewCategory(params) {

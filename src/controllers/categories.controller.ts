@@ -1,5 +1,10 @@
 import { Request, Response } from 'express-serve-static-core';
-import { getAllCategories, addNewCategory } from '../model/db/queries';
+import {
+  getAllCategories,
+  addNewCategory,
+  getItemsForCategory,
+  getCategoryData
+} from '../model/db/queries';
 import { addCategoryFormReturnType } from '../types';
 
 export async function renderAllCategoriesPage(req: Request, res: Response) {
@@ -18,4 +23,15 @@ export async function createCategory(
   const params: addCategoryFormReturnType = req.body;
   const createdCategory = await addNewCategory(params);
   res.redirect(`/categories/${createdCategory.id}`);
+}
+
+export async function renderCategoryPage(req: Request, res: Response) {
+  const categoryId = parseInt(req.params.id);
+  const items = await getItemsForCategory(categoryId);
+  const categoryData = await getCategoryData(categoryId);
+  res.render('pages/category', {
+    title: categoryData.name,
+    categoryData,
+    items: items
+  });
 }

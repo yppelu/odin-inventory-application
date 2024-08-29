@@ -2,7 +2,8 @@ import { Router } from 'express';
 import {
   createCategory,
   renderAddCategoryPage,
-  renderAllCategoriesPage
+  renderAllCategoriesPage,
+  renderCategoryPage
 } from '../controllers/categories.controller';
 
 const categoriesRouter = Router();
@@ -16,7 +17,7 @@ categoriesRouter
 
 categoriesRouter
   .route('/:id')
-  .get((req, res) => {})
+  .get(renderCategoryPage)
   .delete((req, res) => {});
 
 categoriesRouter

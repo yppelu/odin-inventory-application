@@ -11,6 +11,12 @@ import {
 const queries: queriesType = {
   selectAllCategories: 'SELECT * FROM categories;',
   selectAllItems: 'SELECT * FROM items;',
+  selectCategoryData: 'SELECT * FROM categories WHERE id = $1;',
+  selectITemsForCategory: `
+    SELECT items.id, items.name, items.description, items.price, items.image
+    FROM items
+    JOIN category_item_relations ON items.id = category_item_relations.item_id
+    WHERE category_item_relations.category_id = $1;`,
   insertNewCategory:
     'INSERT INTO categories (name, description, image) VALUES ($1, $2, $3) RETURNING *;',
   insertNewItem:
@@ -21,7 +27,7 @@ const queries: queriesType = {
 
 async function makeQuery<T>(
   query: string,
-  params?: (string | number | number[] | undefined)[]
+  params?: (string | number | undefined)[]
 ): Promise<T[]> {
   const { rows } = params
     ? await pool.query(query, params)
@@ -35,6 +41,24 @@ export async function getAllCategories(): Promise<CategoryType[]> {
 
 export async function getAllItems(): Promise<ItemType[]> {
   return await makeQuery<ItemType>(queries.selectAllItems);
+}
+
+export async function getCategoryData(
+  categoryId: number
+): Promise<CategoryType> {
+  const categoriesData = await makeQuery<CategoryType>(
+    queries.selectCategoryData,
+    [categoryId]
+  );
+  return categoriesData[0];
+}
+
+export async function getItemsForCategory(
+  categoryId: number
+): Promise<ItemType[]> {
+  return await makeQuery<ItemType>(queries.selectITemsForCategory, [
+    categoryId
+  ]);
 }
 
 export async function addNewCategory(

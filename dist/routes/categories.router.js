@@ -10,7 +10,7 @@ categoriesRouter
     .post(categories_controller_1.createCategory);
 categoriesRouter
     .route('/:id')
-    .get((req, res) => { })
+    .get(categories_controller_1.renderCategoryPage)
     .delete((req, res) => { });
 categoriesRouter
     .route('/:id/update-category')

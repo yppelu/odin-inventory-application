@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.renderAllCategoriesPage = renderAllCategoriesPage;
 exports.renderAddCategoryPage = renderAddCategoryPage;
 exports.createCategory = createCategory;
+exports.renderCategoryPage = renderCategoryPage;
 const queries_1 = require("../model/db/queries");
 function renderAllCategoriesPage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -20,14 +21,24 @@ function renderAllCategoriesPage(req, res) {
     });
 }
 function renderAddCategoryPage(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        res.render('pages/add-category', { title: 'Add Category' });
-    });
+    res.render('pages/add-category', { title: 'Add Category' });
 }
 function createCategory(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const params = req.body;
         const createdCategory = yield (0, queries_1.addNewCategory)(params);
         res.redirect(`/categories/${createdCategory.id}`);
+    });
+}
+function renderCategoryPage(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const categoryId = parseInt(req.params.id);
+        const items = yield (0, queries_1.getItemsForCategory)(categoryId);
+        const categoryData = yield (0, queries_1.getCategoryData)(categoryId);
+        res.render('pages/category', {
+            title: categoryData.name,
+            categoryData,
+            items: items
+        });
     });
 }

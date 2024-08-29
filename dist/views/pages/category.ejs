@@ -1,0 +1,16 @@
+<%- include('../partials/head') %>
+  <div class="category-header">
+    <h2 class="category-title"><%= categoryData.name %></h2>
+    <a class="update-category-link" href="/categories/<%= categoryData.id %>/update-category">
+      Edit category
+    </a>
+  </div>
+  <div class="category-body__wrapper">
+    <h3 class="category-body__title">Items in category</h3>
+    <div class="category-body">
+      <% items.forEach((item) => { %>
+        <%- include('../partials/item-preview', {id: item.id, name: item.name, price: item.price, image: item.image}) %>
+      <% }); %>
+    </div>
+  </div>
+<%- include('../partials/footer') %>
