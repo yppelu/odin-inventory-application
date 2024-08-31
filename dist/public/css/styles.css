@@ -86,9 +86,23 @@ body {
 
   display: flex;
   justify-content: center;
+  align-items: center;
 
   border-bottom: 1px solid #ececec;
+}
+
+.header__content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-left: auto;
+  margin-right: auto;
   padding: 1rem;
+  max-width: 1220px;
+  width: 100%;
 }
 
 .header__title {
@@ -97,6 +111,12 @@ body {
   font-weight: 700;
   text-align: center;
   text-transform: uppercase;
+}
+
+.header__control-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .main {
@@ -113,7 +133,19 @@ body {
 }
 
 .index-navigation-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+
   padding: 1rem;
+}
+
+.index-navigation__title {
+  color: #464853;
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-align: center;
 }
 
 .index-navigation-list {
@@ -124,11 +156,13 @@ body {
 }
 
 .index-navigation-list-item {
-  border-radius: 0.5rem;
+  background-color: #0066ff;
+  border-radius: 0.25rem;
+  color: #ffffff;
   font-weight: 500;
-  transition: border-color 0.15s ease-in-out;
+  transition: background-color 0.15s ease-in-out;
 
-  border: 1px solid #ececec;
+  border: none;
   height: 3rem;
   width: 20ch;
 }
@@ -166,13 +200,30 @@ body {
 }
 
 .add-category-link,
-.add-item-link,
+.add-item-link {
+  border-radius: 0.25rem;
+  transition:
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    color 0.15s ease-in-out;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #464853;
+
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  width: 15ch;
+}
+
 .add-category-form__submit-button,
 .add-item-form__submit-button,
 .update-category-link,
 .update-item-link {
   background-color: #0066ff;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   color: #ffffff;
   font-weight: 500;
   transition: background-color 0.15s ease-in-out;
@@ -185,7 +236,7 @@ body {
 
 .delete-button {
   background-color: #db0400;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   color: #ffffff;
   font-weight: 500;
   transition: background-color 0.15s ease-in-out;
@@ -198,7 +249,7 @@ body {
 
 .confirm-deletion-form {
   background-color: #ffffff;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   transform: translateX(-50%);
 
   display: flex;
@@ -247,7 +298,7 @@ body {
 
 .category-preview,
 .item-preview {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   overflow: hidden;
   transition: border-color 0.15s ease-in-out;
 
@@ -319,7 +370,7 @@ body {
 
 .add-category-form__fieldset,
 .add-item-form__fieldset {
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
 
   display: flex;
   flex-direction: column;
@@ -381,8 +432,6 @@ body {
 }
 
 .category-body__title {
-  align-items: start;
-
   font-size: 1.2rem;
   font-weight: 500;
 }
@@ -433,11 +482,16 @@ body {
 
 @media (hover: hover) {
   .index-navigation-list-item:hover {
-    border-color: #b1b0b5;
+    background-color: #005ce6;
   }
 
   .add-category-link:hover,
-  .add-item-link:hover,
+  .add-item-link:hover {
+    background-color: #0066ff;
+    border-color: #0066ff;
+    color: #ffffff;
+  }
+
   .add-category-form__submit-button:hover,
   .add-item-form__submit-button:hover,
   .update-category-link:hover,
@@ -464,5 +518,11 @@ body {
   .categories-body {
     border-left: none;
     border-right: none;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .header__content-wrapper {
+    justify-content: center;
   }
 }
