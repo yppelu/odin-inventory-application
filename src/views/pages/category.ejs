@@ -1,9 +1,19 @@
 <%- include('../partials/head') %>
+  <form class="confirm-deletion-form hidden" action="/categories/<%= categoryData.id %>/delete-category" method="post">
+    <label class="confirm-deletion-form__label">
+      <p>Please enter password to delete:</p>
+      <input class="confirm-deletion-form__input" type="password" name="delete-password" required />
+    </label>
+    <button class="delete-button" type="submit">Delete</button>
+  </form>
   <div class="category-header">
     <h2 class="category-title"><%= categoryData.name %></h2>
-    <a class="update-category-link" href="/categories/<%= categoryData.id %>/update-category">
-      Edit category
-    </a>
+    <div class="category__controls-wrapper">
+      <a class="update-category-link" href="/categories/<%= categoryData.id %>/update-category">
+        Edit category
+      </a>
+      <button class="delete-button" type="button" onclick="showConfirmDeletionForm()">Delete category</button>
+    </div>
   </div>
   <div class="category-body__wrapper">
     <h3 class="category-body__title">Items in category</h3>
