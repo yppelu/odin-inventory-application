@@ -5,10 +5,8 @@ const items_controller_1 = require("../controllers/items.controller");
 const itemsRouter = (0, express_1.Router)();
 itemsRouter.get('/', items_controller_1.renderAllItemsPage);
 itemsRouter.route('/add-item').get(items_controller_1.renderAddItemPage).post(items_controller_1.createItem);
-itemsRouter
-    .route('/:id')
-    .get(items_controller_1.renderItemPage)
-    .delete((req, res) => { });
+itemsRouter.get('/:id', items_controller_1.renderItemPage);
+itemsRouter.post('/:id/delete-item', items_controller_1.deleteItem);
 itemsRouter
     .route('/:id/update-item')
     .get((req, res) => { })

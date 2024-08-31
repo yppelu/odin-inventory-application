@@ -8,6 +8,9 @@
   </form>
   <div class="category-header">
     <h2 class="category-title"><%= categoryData.name %></h2>
+    <% if (categoryData) {%>
+      <p><%= categoryData.description %></p>
+    <% } %>
     <div class="category__controls-wrapper">
       <a class="update-category-link" href="/categories/<%= categoryData.id %>/update-category">
         Edit category
@@ -18,9 +21,13 @@
   <div class="category-body__wrapper">
     <h3 class="category-body__title">Items in category</h3>
     <div class="category-body">
-      <% items.forEach((item) => { %>
-        <%- include('../partials/item-preview', {id: item.id, name: item.name, price: item.price, image: item.image}) %>
-      <% }); %>
+      <% if (!items.length) { %>
+        No items in the category...
+      <% } else { %>
+        <% items.forEach((item) => { %>
+          <%- include('../partials/item-preview', {id: item.id, name: item.name, price: item.price, image: item.image}) %>
+        <% }); %>
+      <% } %>
     </div>
   </div>
 <%- include('../partials/footer') %>

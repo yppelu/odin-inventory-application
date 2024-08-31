@@ -1,7 +1,8 @@
 import { Request, Response } from 'express-serve-static-core';
 import {
-  getAllCategories,
   addNewCategory,
+  deleteFromCategories,
+  getAllCategories,
   getItemsForCategory,
   getCategoryData
 } from '../model/db/queries';
@@ -23,6 +24,12 @@ export async function createCategory(
   const params: addCategoryFormReturnType = req.body;
   const createdCategory = await addNewCategory(params);
   res.redirect(`/categories/${createdCategory.id}`);
+}
+
+export async function deleteCategory(req: Request, res: Response) {
+  const categoryId = parseInt(req.params.id);
+  await deleteFromCategories(categoryId);
+  res.redirect('/categories');
 }
 
 export async function renderCategoryPage(

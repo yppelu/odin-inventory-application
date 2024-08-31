@@ -22,11 +22,15 @@
   </fieldset>
   <fieldset class="add-item-form__fieldset">
     <legend class="add-item-form__legend">Choose category(ies)</legend>
-    <% for (let i = 0; i < categories.length; i++) { %>
-      <label class="add-item-form__choose-category-label">
-        <input type="checkbox" name="<%= 'check-' + categories[i].id %>" />
-        <%= categories[i].name %>
-      </label>
+    <% if (!categories.length) {%>
+      No categories exist...
+    <% } else { %>
+      <% for (let i = 0; i < categories.length; i++) { %>
+        <label class="add-item-form__choose-category-label">
+          <input type="checkbox" name="<%= 'check-' + categories[i].id %>" />
+          <%= categories[i].name %>
+        </label>
+      <% } %>
     <% } %>
   </fieldset>
   <fieldset class="add-item-form__fieldset">

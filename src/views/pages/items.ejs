@@ -6,8 +6,12 @@
     </a>
   </div>
   <div class="items-body">
-    <% items.forEach((item) => { %>
-      <%- include('../partials/item-preview', {id: item.id, name: item.name, price: item.price, image: item.image}) %>
-    <% }); %>
+    <% if (!items.length) { %>
+      The list is empty... 
+    <% } else { %>
+      <% items.forEach((item) => { %>
+        <%- include('../partials/item-preview', {id: item.id, name: item.name, price: item.price, image: item.image}) %>
+      <% }); %>
+    <% } %>
   </div>
 <%- include('../partials/footer') %>

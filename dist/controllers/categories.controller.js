@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.renderAllCategoriesPage = renderAllCategoriesPage;
 exports.renderAddCategoryPage = renderAddCategoryPage;
 exports.createCategory = createCategory;
+exports.deleteCategory = deleteCategory;
 exports.renderCategoryPage = renderCategoryPage;
 const queries_1 = require("../model/db/queries");
 function renderAllCategoriesPage(req, res) {
@@ -28,6 +29,13 @@ function createCategory(req, res) {
         const params = req.body;
         const createdCategory = yield (0, queries_1.addNewCategory)(params);
         res.redirect(`/categories/${createdCategory.id}`);
+    });
+}
+function deleteCategory(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const categoryId = parseInt(req.params.id);
+        yield (0, queries_1.deleteFromCategories)(categoryId);
+        res.redirect('/categories');
     });
 }
 function renderCategoryPage(req, res) {

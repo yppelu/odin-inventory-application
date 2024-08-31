@@ -1,6 +1,7 @@
 import { Request, Response } from 'express-serve-static-core';
 import {
   addNewItem,
+  deleteFromItems,
   getAllCategories,
   getAllItems,
   getItemData
@@ -36,6 +37,12 @@ export async function createItem(req: Request, res: Response): Promise<void> {
   const createdItem = await addNewItem(params);
 
   res.redirect(`/items/${createdItem.id}`);
+}
+
+export async function deleteItem(req: Request, res: Response) {
+  const itemId = parseInt(req.params.id);
+  await deleteFromItems(itemId);
+  res.redirect('/items');
 }
 
 export async function renderItemPage(

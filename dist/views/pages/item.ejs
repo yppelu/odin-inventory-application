@@ -1,4 +1,11 @@
 <%- include('../partials/head') %>
+  <form class="confirm-deletion-form hidden" action="/items/<%= itemData.id %>/delete-item" method="post">
+    <label class="confirm-deletion-form__label">
+      <p>Please enter password to delete:</p>
+      <input class="confirm-deletion-form__input" type="password" name="delete-password" required />
+    </label>
+    <button class="delete-button" type="submit">Delete</button>
+  </form>
   <div class="item-wrapper">
     <% if (itemData.image) {%>
       <img class="item__image" src="<%= itemData.image %>" alt="<%= title %>">
@@ -10,6 +17,7 @@
       <a class="update-item-link" href="/items/<%= itemData.id %>/update-item">
         Edit item
       </a>
+      <button class="delete-button" type="button" onclick="showConfirmDeletionForm()">Delete item</button>
     </div>
   </div>
 <%- include('../partials/footer') %>

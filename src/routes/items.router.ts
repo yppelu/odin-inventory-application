@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createItem,
+  deleteItem,
   renderAddItemPage,
   renderAllItemsPage,
   renderItemPage
@@ -12,10 +13,8 @@ itemsRouter.get('/', renderAllItemsPage);
 
 itemsRouter.route('/add-item').get(renderAddItemPage).post(createItem);
 
-itemsRouter
-  .route('/:id')
-  .get(renderItemPage)
-  .delete((req, res) => {});
+itemsRouter.get('/:id', renderItemPage);
+itemsRouter.post('/:id/delete-item', deleteItem);
 
 itemsRouter
   .route('/:id/update-item')

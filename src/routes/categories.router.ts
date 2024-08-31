@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createCategory,
+  deleteCategory,
   renderAddCategoryPage,
   renderAllCategoriesPage,
   renderCategoryPage
@@ -15,10 +16,8 @@ categoriesRouter
   .get(renderAddCategoryPage)
   .post(createCategory);
 
-categoriesRouter
-  .route('/:id')
-  .get(renderCategoryPage)
-  .delete((req, res) => {});
+categoriesRouter.get('/:id', renderCategoryPage);
+categoriesRouter.post('/:id/delete-category', deleteCategory);
 
 categoriesRouter
   .route('/:id/update-category')
