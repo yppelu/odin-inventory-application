@@ -4,7 +4,10 @@
       <p>Please enter password to delete:</p>
       <input class="confirm-deletion-form__input" type="password" name="delete-password" required />
     </label>
-    <button class="delete-button" type="submit">Delete</button>
+    <div class="confirm-deletion-form__buttons-wrapper">
+      <button class="delete-button" type="submit">Delete</button>
+      <button class="cancel-button" type="reset" onclick="toggleShowConfirmDeletionForm()">Cancel</button>
+    </div>
   </form>
   <div class="category-header">
     <h2 class="category-title"><%= categoryData.name %></h2>
@@ -15,7 +18,7 @@
       <a class="update-category-link" href="/categories/<%= categoryData.id %>/update-category">
         Edit category
       </a>
-      <button class="delete-button" type="button" onclick="showConfirmDeletionForm()">Delete category</button>
+      <button class="delete-button" type="button" onclick="toggleShowConfirmDeletionForm()">Delete category</button>
     </div>
   </div>
   <div class="category-body__wrapper">

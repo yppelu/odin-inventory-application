@@ -4,7 +4,10 @@
       <p>Please enter password to delete:</p>
       <input class="confirm-deletion-form__input" type="password" name="delete-password" required />
     </label>
-    <button class="delete-button" type="submit">Delete</button>
+    <div class="confirm-deletion-form__buttons-wrapper">
+      <button class="delete-button" type="submit">Delete</button>
+      <button class="cancel-button" type="reset" onclick="toggleShowConfirmDeletionForm()">Cancel</button>
+    </div>
   </form>
   <div class="item-wrapper">
     <% if (itemData.image) {%>
@@ -17,7 +20,7 @@
       <a class="update-item-link" href="/items/<%= itemData.id %>/update-item">
         Edit item
       </a>
-      <button class="delete-button" type="button" onclick="showConfirmDeletionForm()">Delete item</button>
+      <button class="delete-button" type="button" onclick="toggleShowConfirmDeletionForm()">Delete item</button>
     </div>
   </div>
 <%- include('../partials/footer') %>
