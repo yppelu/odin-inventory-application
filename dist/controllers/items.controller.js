@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.renderAllItemsPage = renderAllItemsPage;
 exports.renderAddItemPage = renderAddItemPage;
 exports.createItem = createItem;
+exports.renderItemPage = renderItemPage;
 const queries_1 = require("../model/db/queries");
 function renderAllItemsPage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -43,5 +44,12 @@ function createItem(req, res) {
         };
         const createdItem = yield (0, queries_1.addNewItem)(params);
         res.redirect(`/items/${createdItem.id}`);
+    });
+}
+function renderItemPage(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const itemId = parseInt(req.params.id);
+        const itemData = yield (0, queries_1.getItemData)(itemId);
+        res.render('pages/item', { title: itemData.name, itemData });
     });
 }

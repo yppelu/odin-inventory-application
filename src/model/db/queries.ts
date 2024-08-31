@@ -12,6 +12,7 @@ const queries: queriesType = {
   selectAllCategories: 'SELECT * FROM categories;',
   selectAllItems: 'SELECT * FROM items;',
   selectCategoryData: 'SELECT * FROM categories WHERE id = $1;',
+  selectItemData: 'SELECT * FROM items WHERE id = $1;',
   selectITemsForCategory: `
     SELECT items.id, items.name, items.description, items.price, items.image
     FROM items
@@ -51,6 +52,11 @@ export async function getCategoryData(
     [categoryId]
   );
   return categoriesData[0];
+}
+
+export async function getItemData(itemId: number): Promise<ItemType> {
+  const itemsData = await makeQuery<ItemType>(queries.selectItemData, [itemId]);
+  return itemsData[0];
 }
 
 export async function getItemsForCategory(

@@ -1,5 +1,10 @@
 import { Request, Response } from 'express-serve-static-core';
-import { addNewItem, getAllCategories, getAllItems } from '../model/db/queries';
+import {
+  addNewItem,
+  getAllCategories,
+  getAllItems,
+  getItemData
+} from '../model/db/queries';
 import { addItemFormReturnType } from '../types';
 
 export async function renderAllItemsPage(req: Request, res: Response) {
@@ -31,4 +36,13 @@ export async function createItem(req: Request, res: Response): Promise<void> {
   const createdItem = await addNewItem(params);
 
   res.redirect(`/items/${createdItem.id}`);
+}
+
+export async function renderItemPage(
+  req: Request,
+  res: Response
+): Promise<void> {
+  const itemId = parseInt(req.params.id);
+  const itemData = await getItemData(itemId);
+  res.render('pages/item', { title: itemData.name, itemData });
 }

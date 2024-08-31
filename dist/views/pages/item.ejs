@@ -1,0 +1,15 @@
+<%- include('../partials/head') %>
+  <div class="item-wrapper">
+    <% if (itemData.image) {%>
+      <img class="item__image" src="<%= itemData.image %>" alt="<%= title %>">
+    <% } %>
+    <h2 class="item__title"><%= title %></h2>
+    <p class="item__price">$<%= itemData.price.toFixed(2) %></p>
+    <p class="item__description"><%= itemData.description %></p>
+    <div class="item__controls-wrapper">
+      <a class="update-item-link" href="/items/<%= itemData.id %>/update-item">
+        Edit item
+      </a>
+    </div>
+  </div>
+<%- include('../partials/footer') %>

@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllCategories = getAllCategories;
 exports.getAllItems = getAllItems;
 exports.getCategoryData = getCategoryData;
+exports.getItemData = getItemData;
 exports.getItemsForCategory = getItemsForCategory;
 exports.addNewCategory = addNewCategory;
 exports.addItemCategoriesRelation = addItemCategoriesRelation;
@@ -24,6 +25,7 @@ const queries = {
     selectAllCategories: 'SELECT * FROM categories;',
     selectAllItems: 'SELECT * FROM items;',
     selectCategoryData: 'SELECT * FROM categories WHERE id = $1;',
+    selectItemData: 'SELECT * FROM items WHERE id = $1;',
     selectITemsForCategory: `
     SELECT items.id, items.name, items.description, items.price, items.image
     FROM items
@@ -55,6 +57,12 @@ function getCategoryData(categoryId) {
     return __awaiter(this, void 0, void 0, function* () {
         const categoriesData = yield makeQuery(queries.selectCategoryData, [categoryId]);
         return categoriesData[0];
+    });
+}
+function getItemData(itemId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const itemsData = yield makeQuery(queries.selectItemData, [itemId]);
+        return itemsData[0];
     });
 }
 function getItemsForCategory(categoryId) {

@@ -2,7 +2,8 @@ import { Router } from 'express';
 import {
   createItem,
   renderAddItemPage,
-  renderAllItemsPage
+  renderAllItemsPage,
+  renderItemPage
 } from '../controllers/items.controller';
 
 const itemsRouter = Router();
@@ -13,7 +14,7 @@ itemsRouter.route('/add-item').get(renderAddItemPage).post(createItem);
 
 itemsRouter
   .route('/:id')
-  .get((req, res) => {})
+  .get(renderItemPage)
   .delete((req, res) => {});
 
 itemsRouter

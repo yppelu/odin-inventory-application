@@ -7,7 +7,7 @@ itemsRouter.get('/', items_controller_1.renderAllItemsPage);
 itemsRouter.route('/add-item').get(items_controller_1.renderAddItemPage).post(items_controller_1.createItem);
 itemsRouter
     .route('/:id')
-    .get((req, res) => { })
+    .get(items_controller_1.renderItemPage)
     .delete((req, res) => { });
 itemsRouter
     .route('/:id/update-item')

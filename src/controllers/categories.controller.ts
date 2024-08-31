@@ -25,7 +25,10 @@ export async function createCategory(
   res.redirect(`/categories/${createdCategory.id}`);
 }
 
-export async function renderCategoryPage(req: Request, res: Response) {
+export async function renderCategoryPage(
+  req: Request,
+  res: Response
+): Promise<void> {
   const categoryId = parseInt(req.params.id);
   const items = await getItemsForCategory(categoryId);
   const categoryData = await getCategoryData(categoryId);
