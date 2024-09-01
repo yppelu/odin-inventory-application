@@ -4,7 +4,8 @@ import {
   deleteFromCategories,
   getAllCategories,
   getItemsForCategory,
-  getCategoryData
+  getCategoryData,
+  updateCategoryData
 } from '../model/db/queries';
 import { addCategoryFormReturnType } from '../types';
 
@@ -26,7 +27,10 @@ export async function createCategory(
   res.redirect(`/categories/${createdCategory.id}`);
 }
 
-export async function deleteCategory(req: Request, res: Response) {
+export async function deleteCategory(
+  req: Request,
+  res: Response
+): Promise<void> {
   const categoryId = parseInt(req.params.id);
   await deleteFromCategories(categoryId);
   res.redirect('/categories');
@@ -44,4 +48,27 @@ export async function renderCategoryPage(
     categoryData,
     items: items
   });
+}
+
+export async function renderUpdateCategoryPage(req: Request, res: Response) {
+  const categoryId = parseInt(req.params.id);
+  const categoryData = await getCategoryData(categoryId);
+  res.render('pages/update-category', {
+    title: 'Update Category',
+    categoryData
+  });
+}
+
+export async function updateCategory(
+  req: Request,
+  res: Response
+): Promise<void> {
+  const categoryId = parseInt(req.params.id);
+  const [name, description, image] = [
+    req.body.name,
+    req.body.description,
+    req.body['image-url']
+  ];
+  await updateCategoryData({ id: categoryId, name, description, image });
+  res.redirect(`/categories/${categoryId}`);
 }

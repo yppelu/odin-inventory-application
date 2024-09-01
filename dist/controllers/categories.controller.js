@@ -14,6 +14,8 @@ exports.renderAddCategoryPage = renderAddCategoryPage;
 exports.createCategory = createCategory;
 exports.deleteCategory = deleteCategory;
 exports.renderCategoryPage = renderCategoryPage;
+exports.renderUpdateCategoryPage = renderUpdateCategoryPage;
+exports.updateCategory = updateCategory;
 const queries_1 = require("../model/db/queries");
 function renderAllCategoriesPage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -48,5 +50,27 @@ function renderCategoryPage(req, res) {
             categoryData,
             items: items
         });
+    });
+}
+function renderUpdateCategoryPage(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const categoryId = parseInt(req.params.id);
+        const categoryData = yield (0, queries_1.getCategoryData)(categoryId);
+        res.render('pages/update-category', {
+            title: 'Update Category',
+            categoryData
+        });
+    });
+}
+function updateCategory(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const categoryId = parseInt(req.params.id);
+        const [name, description, image] = [
+            req.body.name,
+            req.body.description,
+            req.body['image-url']
+        ];
+        yield (0, queries_1.updateCategoryData)({ id: categoryId, name, description, image });
+        res.redirect(`/categories/${categoryId}`);
     });
 }

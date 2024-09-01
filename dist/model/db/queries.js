@@ -22,6 +22,7 @@ exports.addItemCategoriesRelation = addItemCategoriesRelation;
 exports.addNewItem = addNewItem;
 exports.deleteFromCategories = deleteFromCategories;
 exports.deleteFromItems = deleteFromItems;
+exports.updateCategoryData = updateCategoryData;
 const pool_1 = __importDefault(require("./pool"));
 const queries = {
     selectAllCategories: 'SELECT * FROM categories;',
@@ -37,7 +38,14 @@ const queries = {
     insertNewItem: 'INSERT INTO items (name, description, price, image) VALUES ($1, $2, $3, $4) RETURNING *;',
     insertCategoryItemRelation: 'INSERT INTO category_item_relations (category_id, item_id) VALUES ($1, $2);',
     deleteFromCategories: 'DELETE FROM categories WHERE id = $1;',
-    deleteFromItems: 'DELETE FROM items WHERE id = $1;'
+    deleteFromItems: 'DELETE FROM items WHERE id = $1;',
+    updateCategory: `
+    UPDATE categories
+    SET
+      name = $2,
+      description = $3,
+      image = $4
+    WHERE id = $1;`
 };
 function makeQuery(query, params) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -115,5 +123,10 @@ function deleteFromCategories(categoryId) {
 function deleteFromItems(itemId) {
     return __awaiter(this, void 0, void 0, function* () {
         yield makeQuery(queries.deleteFromItems, [itemId]);
+    });
+}
+function updateCategoryData(_a) {
+    return __awaiter(this, arguments, void 0, function* ({ id, name, description, image }) {
+        yield makeQuery(queries.updateCategory, [id, name, description, image]);
     });
 }

@@ -222,7 +222,9 @@ body {
 .add-item-form__submit-button,
 .update-category-link,
 .update-item-link,
-.cancel-button {
+.cancel-button,
+.update-category-form__submit-button,
+.update-category-form__cancel-link {
   background-color: #0066ff;
   border-radius: 0.25rem;
   color: #ffffff;
@@ -355,7 +357,8 @@ body {
 }
 
 .add-category__title,
-.add-item__title {
+.add-item__title,
+.update-category__title {
   font-size: 1.3rem;
   font-weight: 500;
 
@@ -364,7 +367,8 @@ body {
 }
 
 .add-category-form,
-.add-item-form {
+.add-item-form,
+.update-category-form {
   align-self: center;
   display: flex;
   flex-direction: column;
@@ -374,7 +378,8 @@ body {
 }
 
 .add-category-form__fieldset,
-.add-item-form__fieldset {
+.add-item-form__fieldset,
+.update-category-form__fieldset {
   border-radius: 0.25rem;
 
   display: flex;
@@ -386,25 +391,29 @@ body {
 }
 
 .add-category-form__legend,
-.add-item-form__legend {
+.add-item-form__legend,
+.update-category-form__legend {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
 }
 
 .add-category-form__label,
-.add-item-form__label {
+.add-item-form__label,
+.update-category-form__label {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
 }
 
 .add-category-form__label-text,
-.add-item-form__label-text {
+.add-item-form__label-text,
+.update-category-form__label-text {
   font-weight: 500;
 }
 
 .add-category-form__input,
-.add-item-form__input {
+.add-item-form__input,
+.update-category-form__input {
   appearance: none;
   border-radius: 0.25rem;
 
@@ -481,6 +490,12 @@ body {
   gap: 1rem;
 }
 
+.update-category-form__buttons-wrapper {
+  align-self: flex-start;
+  display: flex;
+  gap: 1rem;
+}
+
 .hidden {
   display: none;
 }
@@ -501,7 +516,9 @@ body {
   .add-item-form__submit-button:hover,
   .update-category-link:hover,
   .update-item-link:hover,
-  .cancel-button:hover {
+  .cancel-button:hover,
+  .update-category-form__submit-button:hover,
+  .update-category-form__cancel-link:hover {
     background-color: #005ce6;
   }
 

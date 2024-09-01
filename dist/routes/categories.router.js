@@ -12,6 +12,6 @@ categoriesRouter.get('/:id', categories_controller_1.renderCategoryPage);
 categoriesRouter.post('/:id/delete-category', categories_controller_1.deleteCategory);
 categoriesRouter
     .route('/:id/update-category')
-    .get((req, res) => { })
-    .put((req, res) => { });
+    .get(categories_controller_1.renderUpdateCategoryPage)
+    .post(categories_controller_1.updateCategory);
 exports.default = categoriesRouter;

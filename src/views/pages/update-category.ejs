@@ -1,0 +1,31 @@
+<%- include('../partials/head') %>
+<h2 class="update-category__title">Update Category</h2>
+<form
+  class="update-category-form"
+  action="/categories/<%= categoryData.id %>/update-category"
+  method="post"
+>
+  <fieldset class="update-category-form__fieldset">
+    <legend class="update-category-form__legend">Main information</legend>
+    <label class="update-category-form__label">
+      <span class="update-category-form__label-text">Name:</span>
+      <input class="update-category-form__input" type="text" name="name" value="<%= categoryData.name %>" required />
+    </label>
+    <label class="update-category-form__label">
+      <span class="update-category-form__label-text">Description:</span>
+      <textarea class="update-category-form__input" name="description" rows="4"><%= categoryData.description %></textarea>
+    </label>
+  </fieldset>
+  <fieldset class="update-category-form__fieldset">
+    <legend class="update-category-form__legend">Image</legend>
+    <label class="update-category-form__label">
+      <span class="update-category-form__label-text">Enter a URL:</span>
+      <input class="update-category-form__input" type="url" name="image-url"  value="<%= categoryData.image %>" />
+    </label>
+  </fieldset>
+  <div class="update-category-form__buttons-wrapper">
+    <button class="update-category-form__submit-button" type="submit">Submit</button>
+    <a class="update-category-form__cancel-link" href="/categories/<%= categoryData.id %>">Cancel</a>
+  </div>
+</form>
+<%- include('../partials/footer') %>

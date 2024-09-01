@@ -4,7 +4,9 @@ import {
   deleteCategory,
   renderAddCategoryPage,
   renderAllCategoriesPage,
-  renderCategoryPage
+  renderCategoryPage,
+  renderUpdateCategoryPage,
+  updateCategory
 } from '../controllers/categories.controller';
 
 const categoriesRouter = Router();
@@ -21,7 +23,7 @@ categoriesRouter.post('/:id/delete-category', deleteCategory);
 
 categoriesRouter
   .route('/:id/update-category')
-  .get((req, res) => {})
-  .put((req, res) => {});
+  .get(renderUpdateCategoryPage)
+  .post(updateCategory);
 
 export default categoriesRouter;

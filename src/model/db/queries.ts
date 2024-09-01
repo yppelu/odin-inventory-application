@@ -25,7 +25,14 @@ const queries: queriesType = {
   insertCategoryItemRelation:
     'INSERT INTO category_item_relations (category_id, item_id) VALUES ($1, $2);',
   deleteFromCategories: 'DELETE FROM categories WHERE id = $1;',
-  deleteFromItems: 'DELETE FROM items WHERE id = $1;'
+  deleteFromItems: 'DELETE FROM items WHERE id = $1;',
+  updateCategory: `
+    UPDATE categories
+    SET
+      name = $2,
+      description = $3,
+      image = $4
+    WHERE id = $1;`
 };
 
 async function makeQuery<T>(
@@ -125,4 +132,13 @@ export async function deleteFromCategories(categoryId: number): Promise<void> {
 
 export async function deleteFromItems(itemId: number): Promise<void> {
   await makeQuery<CategoryType>(queries.deleteFromItems, [itemId]);
+}
+
+export async function updateCategoryData({
+  id,
+  name,
+  description,
+  image
+}: CategoryType) {
+  await makeQuery(queries.updateCategory, [id, name, description, image]);
 }
