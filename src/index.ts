@@ -16,6 +16,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', indexRouter);
 app.use('/categories', categoriesRouter);
 app.use('/items', itemsRouter);
+app.use('*', (req, res) => {
+  res.render('pages/404');
+});
 
 app.listen(PORT, () => {
   console.log('Server is running on port ' + PORT); // eslint-disable-line no-console

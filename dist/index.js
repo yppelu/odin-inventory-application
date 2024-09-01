@@ -18,6 +18,9 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use('/', index_router_1.default);
 app.use('/categories', categories_router_1.default);
 app.use('/items', items_router_1.default);
+app.use('*', (req, res) => {
+    res.render('pages/404');
+});
 app.listen(PORT, () => {
     console.log('Server is running on port ' + PORT);
 });

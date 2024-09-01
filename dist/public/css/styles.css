@@ -511,6 +511,30 @@ body {
   color: #db0400;
 }
 
+.not-found-page__wrapper {
+  border-radius: 0.25rem;
+  text-align: center;
+  transform: translate(-50%, -50%);
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  border: 1px solid #b1b0b5;
+  padding: 1rem;
+  min-width: max-content;
+}
+
+.not-found-page__text {
+  color: #464853;
+  font-weight: 500;
+}
+
+.not-found-page__title {
+  font-size: 5rem;
+  font-weight: 700;
+}
+
 .hidden {
   display: none;
 }
