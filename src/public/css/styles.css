@@ -224,7 +224,9 @@ body {
 .update-item-link,
 .cancel-button,
 .update-category-form__submit-button,
-.update-category-form__cancel-link {
+.update-category-form__cancel-link,
+.update-item-form__submit-button,
+.update-item-form__cancel-link {
   background-color: #0066ff;
   border-radius: 0.25rem;
   color: #ffffff;
@@ -358,7 +360,8 @@ body {
 
 .add-category__title,
 .add-item__title,
-.update-category__title {
+.update-category__title,
+.update-item__title {
   font-size: 1.3rem;
   font-weight: 500;
 
@@ -368,7 +371,8 @@ body {
 
 .add-category-form,
 .add-item-form,
-.update-category-form {
+.update-category-form,
+.update-item-form {
   align-self: center;
   display: flex;
   flex-direction: column;
@@ -379,7 +383,8 @@ body {
 
 .add-category-form__fieldset,
 .add-item-form__fieldset,
-.update-category-form__fieldset {
+.update-category-form__fieldset,
+.update-item-form__fieldset {
   border-radius: 0.25rem;
 
   display: flex;
@@ -392,14 +397,16 @@ body {
 
 .add-category-form__legend,
 .add-item-form__legend,
-.update-category-form__legend {
+.update-category-form__legend,
+.update-item-form__legend {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
 }
 
 .add-category-form__label,
 .add-item-form__label,
-.update-category-form__label {
+.update-category-form__label,
+.update-item-form__label {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
@@ -407,13 +414,15 @@ body {
 
 .add-category-form__label-text,
 .add-item-form__label-text,
-.update-category-form__label-text {
+.update-category-form__label-text,
+.update-item-form__label-text {
   font-weight: 500;
 }
 
 .add-category-form__input,
 .add-item-form__input,
-.update-category-form__input {
+.update-category-form__input,
+.update-item-form__input {
   appearance: none;
   border-radius: 0.25rem;
 
@@ -428,7 +437,8 @@ body {
   align-self: flex-start;
 }
 
-.add-item-form__choose-category-label {
+.add-item-form__choose-category-label,
+.update-item-form__choose-category-label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -490,7 +500,8 @@ body {
   gap: 1rem;
 }
 
-.update-category-form__buttons-wrapper {
+.update-category-form__buttons-wrapper,
+.update-item-form__buttons-wrapper {
   align-self: flex-start;
   display: flex;
   gap: 1rem;
@@ -518,7 +529,9 @@ body {
   .update-item-link:hover,
   .cancel-button:hover,
   .update-category-form__submit-button:hover,
-  .update-category-form__cancel-link:hover {
+  .update-category-form__cancel-link:hover,
+  .update-item-form__submit-button:hover,
+  .update-item-form__cancel-link:hover {
     background-color: #005ce6;
   }
 

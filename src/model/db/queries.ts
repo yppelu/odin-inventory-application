@@ -32,7 +32,21 @@ const queries: queriesType = {
       name = $2,
       description = $3,
       image = $4
-    WHERE id = $1;`
+    WHERE id = $1;`,
+  selectCategoriesItemIn: `
+    SELECT categories.id FROM categories
+    JOIN category_item_relations ON categories.id = category_item_relations.category_id
+    WHERE category_item_relations.item_id = $1;`,
+  updateItem: `
+    UPDATE items
+    SET
+      name = $2,
+      description = $3,
+      price = $4,
+      image = $5
+    WHERE id = $1;`,
+  deleteItemCategoriesRelations:
+    'DELETE FROM category_item_relations WHERE item_id = $1;'
 };
 
 async function makeQuery<T>(
@@ -107,6 +121,10 @@ export async function addItemCategoriesRelation(
   }
 }
 
+export async function deleteItemCategoriesRelations(itemId: number) {
+  await makeQuery(queries.deleteItemCategoriesRelations, [itemId]);
+}
+
 export async function addNewItem({
   name,
   description,
@@ -140,5 +158,33 @@ export async function updateCategoryData({
   description,
   image
 }: CategoryType) {
-  await makeQuery(queries.updateCategory, [id, name, description, image]);
+  await makeQuery<CategoryType>(queries.updateCategory, [
+    id,
+    name,
+    description,
+    image
+  ]);
+}
+
+export async function getCategoryIdsItemIn(itemId: number): Promise<number[]> {
+  const categoriesItemIn = await makeQuery<CategoryType>(
+    queries.selectCategoriesItemIn,
+    [itemId]
+  );
+  return categoriesItemIn.map((category) => category.id);
+}
+
+export async function updateItemData(
+  itemId: number,
+  { name, description, price, categoryIds, image }: addItemFormReturnType
+): Promise<void> {
+  await makeQuery<ItemType>(queries.updateItem, [
+    itemId,
+    name,
+    description,
+    price,
+    image
+  ]);
+  await deleteItemCategoriesRelations(itemId);
+  await addItemCategoriesRelation(itemId, categoryIds);
 }

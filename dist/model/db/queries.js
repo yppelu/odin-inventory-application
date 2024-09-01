@@ -19,10 +19,13 @@ exports.getItemData = getItemData;
 exports.getItemsForCategory = getItemsForCategory;
 exports.addNewCategory = addNewCategory;
 exports.addItemCategoriesRelation = addItemCategoriesRelation;
+exports.deleteItemCategoriesRelations = deleteItemCategoriesRelations;
 exports.addNewItem = addNewItem;
 exports.deleteFromCategories = deleteFromCategories;
 exports.deleteFromItems = deleteFromItems;
 exports.updateCategoryData = updateCategoryData;
+exports.getCategoryIdsItemIn = getCategoryIdsItemIn;
+exports.updateItemData = updateItemData;
 const pool_1 = __importDefault(require("./pool"));
 const queries = {
     selectAllCategories: 'SELECT * FROM categories;',
@@ -45,7 +48,20 @@ const queries = {
       name = $2,
       description = $3,
       image = $4
-    WHERE id = $1;`
+    WHERE id = $1;`,
+    selectCategoriesItemIn: `
+    SELECT categories.id FROM categories
+    JOIN category_item_relations ON categories.id = category_item_relations.category_id
+    WHERE category_item_relations.item_id = $1;`,
+    updateItem: `
+    UPDATE items
+    SET
+      name = $2,
+      description = $3,
+      price = $4,
+      image = $5
+    WHERE id = $1;`,
+    deleteItemCategoriesRelations: 'DELETE FROM category_item_relations WHERE item_id = $1;'
 };
 function makeQuery(query, params) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -102,6 +118,11 @@ function addItemCategoriesRelation(itemId, categoryIds) {
         }
     });
 }
+function deleteItemCategoriesRelations(itemId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield makeQuery(queries.deleteItemCategoriesRelations, [itemId]);
+    });
+}
 function addNewItem(_a) {
     return __awaiter(this, arguments, void 0, function* ({ name, description, price, categoryIds, image }) {
         const createdItems = yield makeQuery(queries.insertNewItem, [
@@ -127,6 +148,30 @@ function deleteFromItems(itemId) {
 }
 function updateCategoryData(_a) {
     return __awaiter(this, arguments, void 0, function* ({ id, name, description, image }) {
-        yield makeQuery(queries.updateCategory, [id, name, description, image]);
+        yield makeQuery(queries.updateCategory, [
+            id,
+            name,
+            description,
+            image
+        ]);
+    });
+}
+function getCategoryIdsItemIn(itemId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const categoriesItemIn = yield makeQuery(queries.selectCategoriesItemIn, [itemId]);
+        return categoriesItemIn.map((category) => category.id);
+    });
+}
+function updateItemData(itemId_1, _a) {
+    return __awaiter(this, arguments, void 0, function* (itemId, { name, description, price, categoryIds, image }) {
+        yield makeQuery(queries.updateItem, [
+            itemId,
+            name,
+            description,
+            price,
+            image
+        ]);
+        yield deleteItemCategoriesRelations(itemId);
+        yield addItemCategoriesRelation(itemId, categoryIds);
     });
 }

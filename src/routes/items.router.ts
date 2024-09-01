@@ -4,7 +4,9 @@ import {
   deleteItem,
   renderAddItemPage,
   renderAllItemsPage,
-  renderItemPage
+  renderItemPage,
+  renderUpdateItemPage,
+  updateItem
 } from '../controllers/items.controller';
 
 const itemsRouter = Router();
@@ -18,7 +20,7 @@ itemsRouter.post('/:id/delete-item', deleteItem);
 
 itemsRouter
   .route('/:id/update-item')
-  .get((req, res) => {})
-  .put((req, res) => {});
+  .get(renderUpdateItemPage)
+  .post(updateItem);
 
 export default itemsRouter;

@@ -9,6 +9,6 @@ itemsRouter.get('/:id', items_controller_1.renderItemPage);
 itemsRouter.post('/:id/delete-item', items_controller_1.deleteItem);
 itemsRouter
     .route('/:id/update-item')
-    .get((req, res) => { })
-    .put((req, res) => { });
+    .get(items_controller_1.renderUpdateItemPage)
+    .post(items_controller_1.updateItem);
 exports.default = itemsRouter;

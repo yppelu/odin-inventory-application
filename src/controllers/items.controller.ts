@@ -4,7 +4,9 @@ import {
   deleteFromItems,
   getAllCategories,
   getAllItems,
-  getItemData
+  getItemData,
+  getCategoryIdsItemIn,
+  updateItemData
 } from '../model/db/queries';
 import { addItemFormReturnType } from '../types';
 
@@ -52,4 +54,42 @@ export async function renderItemPage(
   const itemId = parseInt(req.params.id);
   const itemData = await getItemData(itemId);
   res.render('pages/item', { title: itemData.name, itemData });
+}
+
+export async function renderUpdateItemPage(
+  req: Request,
+  res: Response
+): Promise<void> {
+  const itemId = parseInt(req.params.id);
+  const categories = await getAllCategories();
+  const itemData = await getItemData(itemId);
+  const categoryIdsItemIn = await getCategoryIdsItemIn(itemId);
+  res.render('pages/update-item', {
+    title: 'Update Item',
+    itemData,
+    categories,
+    categoryIdsItemIn
+  });
+}
+
+export async function updateItem(req: Request, res: Response) {
+  const chosenCategories: number[] = [];
+  for (const key in req.body) {
+    if (key.match(/check-\d/)) {
+      const categoryIdFromKey = parseInt(key.replace('check-', ''));
+      chosenCategories.push(categoryIdFromKey);
+    }
+  }
+
+  const params: addItemFormReturnType = {
+    name: req.body.name,
+    description: req.body.description,
+    price: req.body.price,
+    categoryIds: chosenCategories,
+    image: req.body['image-url']
+  };
+  const itemId = parseInt(req.params.id);
+  await updateItemData(itemId, params);
+
+  res.redirect(`/items/${itemId}`);
 }

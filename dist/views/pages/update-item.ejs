@@ -1,0 +1,52 @@
+<%- include('../partials/head') %>
+<h2 class="update-item__title">Update Item</h2>
+<form
+  class="update-item-form"
+  action="/items/<%= itemData.id %>/update-item"
+  method="post"
+>
+  <fieldset class="update-item-form__fieldset">
+    <legend class="update-item-form__legend">Main information</legend>
+    <label class="update-item-form__label">
+      <span class="update-item-form__label-text">Name:</span>
+      <input class="update-item-form__input" type="text" name="name" value="<%= itemData.name %>" required />
+    </label>
+    <label class="update-item-form__label">
+      <span class="update-item-form__label-text">Description:</span>
+      <textarea class="update-item-form__input" name="description" rows="4"><%= itemData.description %></textarea>
+    </label>
+    <label class="update-item-form__label">
+      <span class="update-item-form__label-text">Price:</span>
+      <input class="update-item-form__input" type="number" name="price" min="0" step="0.01" value="<%= itemData.price %>" required />
+    </label>
+  </fieldset>
+  <fieldset class="update-item-form__fieldset">
+    <legend class="update-item-form__legend">Choose category(ies)</legend>
+    <% if (!categories.length) {%>
+      No categories exist...
+    <% } else { %>
+      <% for (let i = 0; i < categories.length; i++) { %>
+        <label class="update-item-form__choose-category-label">
+          <input type="checkbox" name="<%= 'check-' + categories[i].id %>"
+            <% if (categoryIdsItemIn.includes(categories[i].id)) {%>
+              checked
+            <% } %>
+          />
+          <%= categories[i].name %>
+        </label>
+      <% } %>
+    <% } %>
+  </fieldset>
+  <fieldset class="update-item-form__fieldset">
+    <legend class="update-item-form__legend">Image</legend>
+    <label class="update-item-form__label">
+      <span class="update-item-form__label-text">Enter a URL:</span>
+      <input class="update-item-form__input" type="url" name="image-url" value="<%= itemData.image %>" />
+    </label>
+  </fieldset>
+  <div class="update-item-form__buttons-wrapper">
+    <button class="update-item-form__submit-button" type="submit">Submit</button>
+    <a class="update-item-form__cancel-link" href="/items/<%= itemData.id %>">Cancel</a>
+  </div>
+</form>
+<%- include('../partials/footer') %>
