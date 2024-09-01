@@ -507,6 +507,10 @@ body {
   gap: 1rem;
 }
 
+.confirm-deletion-form__validation-error {
+  color: #db0400;
+}
+
 .hidden {
   display: none;
 }

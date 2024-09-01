@@ -36,8 +36,13 @@ function createCategory(req, res) {
 function deleteCategory(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const categoryId = parseInt(req.params.id);
-        yield (0, queries_1.deleteFromCategories)(categoryId);
-        res.redirect('/categories');
+        if (req.body['delete-password'] !== process.env.PG_PASSWORD) {
+            res.redirect(`/categories/${categoryId}?wrongPassword=true`);
+        }
+        else {
+            yield (0, queries_1.deleteFromCategories)(categoryId);
+            res.redirect('/categories');
+        }
     });
 }
 function renderCategoryPage(req, res) {
@@ -48,7 +53,8 @@ function renderCategoryPage(req, res) {
         res.render('pages/category', {
             title: categoryData.name,
             categoryData,
-            items: items
+            items: items,
+            wrongPassword: req.query.wrongPassword
         });
     });
 }

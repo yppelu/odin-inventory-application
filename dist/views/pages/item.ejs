@@ -1,7 +1,18 @@
 <%- include('../partials/head') %>
-  <form class="confirm-deletion-form hidden" action="/items/<%= itemData.id %>/delete-item" method="post">
+  <form
+    <% if (wrongPassword) { %>
+      class="confirm-deletion-form" 
+    <% } else { %>
+      class="confirm-deletion-form hidden" 
+    <% } %>
+    action="/items/<%= itemData.id %>/delete-item"
+    method="post"
+  >
     <label class="confirm-deletion-form__label">
       <p>Please enter password to delete:</p>
+      <% if (wrongPassword) { %>
+        <p class="confirm-deletion-form__validation-error">Wrong password</p>
+      <% } %>
       <input class="confirm-deletion-form__input" type="password" name="delete-password" required />
     </label>
     <div class="confirm-deletion-form__buttons-wrapper">

@@ -43,8 +43,13 @@ export async function createItem(req: Request, res: Response): Promise<void> {
 
 export async function deleteItem(req: Request, res: Response) {
   const itemId = parseInt(req.params.id);
-  await deleteFromItems(itemId);
-  res.redirect('/items');
+
+  if (req.body['delete-password'] !== process.env.PG_PASSWORD) {
+    res.redirect(`/items/${itemId}?wrongPassword=true`);
+  } else {
+    await deleteFromItems(itemId);
+    res.redirect('/items');
+  }
 }
 
 export async function renderItemPage(
@@ -53,7 +58,11 @@ export async function renderItemPage(
 ): Promise<void> {
   const itemId = parseInt(req.params.id);
   const itemData = await getItemData(itemId);
-  res.render('pages/item', { title: itemData.name, itemData });
+  res.render('pages/item', {
+    title: itemData.name,
+    itemData,
+    wrongPassword: req.query.wrongPassword
+  });
 }
 
 export async function renderUpdateItemPage(

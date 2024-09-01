@@ -52,15 +52,24 @@ function createItem(req, res) {
 function deleteItem(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const itemId = parseInt(req.params.id);
-        yield (0, queries_1.deleteFromItems)(itemId);
-        res.redirect('/items');
+        if (req.body['delete-password'] !== process.env.PG_PASSWORD) {
+            res.redirect(`/items/${itemId}?wrongPassword=true`);
+        }
+        else {
+            yield (0, queries_1.deleteFromItems)(itemId);
+            res.redirect('/items');
+        }
     });
 }
 function renderItemPage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const itemId = parseInt(req.params.id);
         const itemData = yield (0, queries_1.getItemData)(itemId);
-        res.render('pages/item', { title: itemData.name, itemData });
+        res.render('pages/item', {
+            title: itemData.name,
+            itemData,
+            wrongPassword: req.query.wrongPassword
+        });
     });
 }
 function renderUpdateItemPage(req, res) {

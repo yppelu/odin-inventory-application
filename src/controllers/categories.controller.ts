@@ -32,8 +32,13 @@ export async function deleteCategory(
   res: Response
 ): Promise<void> {
   const categoryId = parseInt(req.params.id);
-  await deleteFromCategories(categoryId);
-  res.redirect('/categories');
+
+  if (req.body['delete-password'] !== process.env.PG_PASSWORD) {
+    res.redirect(`/categories/${categoryId}?wrongPassword=true`);
+  } else {
+    await deleteFromCategories(categoryId);
+    res.redirect('/categories');
+  }
 }
 
 export async function renderCategoryPage(
@@ -46,7 +51,8 @@ export async function renderCategoryPage(
   res.render('pages/category', {
     title: categoryData.name,
     categoryData,
-    items: items
+    items: items,
+    wrongPassword: req.query.wrongPassword
   });
 }
 
